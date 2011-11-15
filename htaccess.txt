@@ -1,0 +1,156 @@
+# BEGIN htaccess
+	# Protect the htaccess file
+	<Files .htaccess>
+		Order Allow,Deny
+		Deny from all
+	</Files>
+	
+	# Protect the WP Config file
+	<Files wp-config.php>
+		Order Allow,Deny
+		Deny from all
+	</Files>
+	
+	# Better website experience for IE users
+		<IfModule mod_setenvif.c>
+			<IfModule mod_headers.c>
+				BrowserMatch MSIE ie
+				Header set X-UA-Compatible "IE=Edge,chrome=1" env=ie
+			</IfModule>
+		</IfModule>
+	
+		<IfModule mod_headers.c>
+			Header append Vary User-Agent
+		</IfModule>
+	
+	# UTF-8 encoding
+		AddDefaultCharset utf-8
+		AddCharset utf-8 .html .css .js .xml .json .rss
+		
+	#	404 Error doc
+		ErrorDocument 404 /404.php
+	
+	# Disable directory browsing
+		Options All -Indexes
+	
+	# Enable the following of symlinks
+		Options +FollowSymLinks
+	
+	<IfModule mod_headers.c>
+		# No ETags, No Pragma
+			Header unset Pragma
+			Header unset ETag
+		# Make sure proxies deliver correct content
+			Header append Vary User-Agent env=!dont-vary
+		# Ensure proxies deliver compressed content correctly
+			Header append Vary Accept-Encoding
+	</IfModule>
+	
+	# Using browser cache
+		FileETag MTime Size
+		<ifmodule mod_expires.c>
+			ExpiresActive on
+			ExpiresByType text/html "access plus 0 seconds"
+			<filesmatch "\.(jpg|gif|png|css|js)$">
+				ExpiresActive on
+				ExpiresDefault "access plus 1 month"
+			</filesmatch>
+			<IfModule mod_headers.c>
+				Header append Cache-Control "public"
+			</IfModule>
+		</ifmodule>
+		
+	FileETag None
+		
+	# Redirect to a temp page - Maintenance
+		#	RewriteCond %{REQUEST_URI} !/maintenance.html$
+		#	RewriteCond %{REMOTE_ADDR} !^123\.123\.123\.123
+		#	RewriteRule $ /maintenance.html [R=302,L]
+		
+	# Allow Webfonts
+		<FilesMatch "\.(ttf|otf|eot|woff|font.css)$">
+			<IfModule mod_headers.c>
+				Header set Access-Control-Allow-Origin "*"
+			</IfModule>
+		</FilesMatch>
+	
+	# Proper MIME type for all files
+		# audio
+			AddType audio/ogg oga ogg
+			AddType audio/mp4 m4a
+	
+		# video
+			AddType video/ogg ogv
+			AddType video/mp4 mp4 m4v
+			AddType video/webm webm
+		
+		# Proper svg serving. Required for svg webfonts on iPad
+			AddType image/svg+xml svg svgz
+			AddEncoding gzip svgz
+		
+		# webfonts                            
+			AddType application/vnd.ms-fontobject eot
+			AddType font/truetype ttf
+			AddType font/opentype otf
+			AddType application/x-font-woff woff
+		
+		# assorted types                                     
+			AddType image/x-icon ico
+			AddType image/webp webp
+			AddType text/cache-manifest appcache manifest
+			AddType text/x-component htc
+			AddType application/x-chrome-extension crx
+			AddType application/x-xpinstall xpi
+			AddType application/octet-stream safariextz
+			AddType text/x-vcard vcf
+
+		
+	# gzip compression
+	<IfModule mod_deflate.c>
+	
+		# force deflate for mangled headers
+		<IfModule mod_setenvif.c>
+			<IfModule mod_headers.c>
+				SetEnvIfNoCase ^(Accept-EncodXng|X-cept-Encoding|X{15}|~{15}|-{15})$ ^((gzip|deflate)\s,?\s(gzip|deflate)?|X{4,13}|~{4,13}|-{4,13})$ HAVE_Accept-Encoding
+				RequestHeader append Accept-Encoding "gzip,deflate" env=HAVE_Accept-Encoding
+			</IfModule>
+		</IfModule>
+				
+		# html, txt, css, js, json, xml, htc:
+		<IfModule filter_module>
+			FilterDeclare   COMPRESS
+			FilterProvider  COMPRESS  DEFLATE resp=Content-Type /text/(html|css|javascript|plain|x(ml|-component))/
+			FilterProvider  COMPRESS  DEFLATE resp=Content-Type /application/(javascript|json|xml|x-javascript)/
+			FilterChain     COMPRESS
+			FilterProtocol  COMPRESS  change=yes;byteranges=no
+		</IfModule>
+	
+		# Legacy versions of Apache
+		<IfModule !mod_filter.c>
+			AddOutputFilterByType DEFLATE text/html text/plain text/css application/json
+			AddOutputFilterByType DEFLATE text/javascript application/javascript application/x-javascript
+			AddOutputFilterByType DEFLATE text/xml application/xml text/x-component
+		</IfModule>
+
+		# webfonts and svg:
+		<FilesMatch "\.(ttf|otf|eot|svg)$" >
+			SetOutputFilter DEFLATE
+		</FilesMatch>
+	</IfModule>
+	
+	# BEGIN WordPress and rewriteengine
+	
+		<IfModule mod_rewrite.c>
+			RewriteEngine On
+			RewriteBase /
+			#	No access to .svn folders
+			RewriteRule "(^|/)\." - [F]
+			RewriteRule ^index\.php$ - [L]
+			RewriteCond %{REQUEST_FILENAME} !-f
+			RewriteCond %{REQUEST_FILENAME} !-d
+			RewriteRule . /index.php [L]
+		</IfModule>
+		
+	# END WordPress
+	
+# END htaccess

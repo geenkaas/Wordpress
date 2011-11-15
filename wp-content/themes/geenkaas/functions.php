@@ -4,10 +4,10 @@
 	define('auto', 'auto');
 	define('test', 'test');
 
-	//	Versie op Bandbreed
-	$sitename = 'Bandbreed';
-	$themename = 'Bandbreed';
-	$shortname = 'bb';
+	//	Theme name
+	$sitename = 'Geenkaas';
+	$themename = 'Geenkaas';
+	$shortname = 'gk';
 	
 	//	Remove admin bar
 	add_action( 'show_admin_bar', '__return_false' );
