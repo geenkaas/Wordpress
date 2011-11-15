@@ -23,7 +23,7 @@
 		<!-- Linkedin inShare -->
 			<script src="http://platform.linkedin.com/in.js"></script>
 		<!-- Twitter -->
-			<!--<script src="http://twitter.com/statuses/user_timeline/exactwatjezoekt.json?callback=twitterCallback2&count=10"></script>-->
+			<!--<script src="http://twitter.com/statuses/user_timeline/REPLACE_THIS.json?callback=twitterCallback2&count=10"></script>-->
 			<script src="//platform.twitter.com/widgets.js"></script>
 		<!-- Facebook -->
 			<div id="fb-root"></div>
@@ -31,10 +31,11 @@
 			
 		<!-- Google Analytics code -->
 		<script>
-			var _gaq=[['_setAccount','UA-6839756-2'],['_trackPageview']];
+			var _gaq=[['_setAccount','REPLACE_THIS'],['_trackPageview']];
 			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
 			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
 			s.parentNode.insertBefore(g,s)}(document,'script'));
+			typeof _gaq!="undefined"&&_gaq!==null&&$(document).ajaxSend(function(a,b,c){_gaq.push(["_trackPageview",c.url])})
 		</script>
 
 		<!-- Piwik Tracking Code -->
@@ -42,10 +43,10 @@
 			var pkBaseURL = (("https:" == document.location.protocol) ? "https://piwik.bandbreed.nl/" : "http://piwik.bandbreed.nl/");
 			document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
 		</script><script type="text/javascript">
-			try { var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 18);
+			try { var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", REPLACE_THIS);
 				piwikTracker.trackPageView();
 				piwikTracker.enableLinkTracking(); } catch( err ) {}
-		</script><noscript><p><img src="http://piwik.bandbreed.nl/piwik.php?idsite=18" style="border:0" /></p></noscript>
+		</script><noscript><p><img src="http://piwik.bandbreed.nl/piwik.php?idsite=REPLACE_THIS" style="border:0" /></p></noscript>
 		<!-- End Piwik Tracking Code -->
 
 		<!--[if lt IE 7 ]>
