@@ -281,5 +281,9 @@ add_action('template_redirect', 'inherit_template', 1);
 		unregister_widget('WP_Widget_Tag_Cloud');
 	}
 	add_action('widgets_init', 'unregister_default_wp_widgets', 1);
+	
+	
+	//	Remove the generator tag
+	remove_action('wp_head', 'wp_generator');
 
 ?>

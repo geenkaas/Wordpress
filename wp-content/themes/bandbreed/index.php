@@ -1,5 +1,7 @@
 		<?php get_header(); ?>
+		
 			<div id="maincontent" role="main">
+			
 				<ul class="clean">
 					<?php $args = array(
 						'category_name' => 'Uncategorized',
@@ -17,5 +19,7 @@
 						</li>
 					<?php endforeach; ?>
 				</ul>
+				
 			</div>
+			
 		<?php get_footer(); ?>
