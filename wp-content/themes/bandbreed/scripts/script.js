@@ -107,7 +107,7 @@
 		
 	};
 
-// Adding alpha and omega classes to lists
+// Adding alpha, omega and middle classes to lists
 	function geenAlphaOmega() {
 	
 		//	Add classes to list items
