@@ -132,4 +132,9 @@
 //	format string function
 	String.prototype.format=function() {var a=/\{\d+\}/g,b=arguments;return this.replace(a,function(a){return b[a.match(/\d+/)]})}
 	
+//	Local storage
+	function createCookie(a,b){if("localStorage"in window&&window["localStorage"]!=null)localStorage.setItem(a,b);else{var c=new Date;c.setTime(c.getTime()+31104e6);var d="; expires="+c.toGMTString();document.cookie=a+"="+b+d+"; path=/"}}
+	function clearCookie(a,b){if("localStorage"in window&&window["localStorage"]!=null)localStorage.setItem(a,null);else{var c="; expires=Thu, 01-Jan-70 00:00:01 GMT";document.cookie=a+"="+c+"; path=/"}}
+	function readCookie(a){var b=null;if("localStorage"in window&&window["localStorage"]!=null)b=localStorage.getItem(a);else{var c=a+"=",d=document.cookie.split(";");for(var e=0;e<d.length;e++){var f=d[e];while(f.charAt(0)==" ")f=f.substring(1,f.length);f.indexOf(c)==0&&(b=f.substring(c.length,f.length))}}if(b!=null){if(b.toLowerCase()=="true")return!0;if(b.toLowerCase()=="false")return!1}return b}
+
 //	////	End Plug-ins
