@@ -139,7 +139,8 @@ header,
 h1, h2, h3, h4, h5, h6, p, a,
 blockquote, pre, abbr, acronym,
 address, big, cite, code, del, ins, samp,
-small, strike, strong, sub, sup, figcaption {
+small, strike, strong, sub, sup, figcaption,
+input, select, texarea, button  {
 	-webkit-user-select: text;
 	-moz-user-select: text;
 	user-select: text;

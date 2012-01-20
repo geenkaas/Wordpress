@@ -4,9 +4,10 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //	Background image variables: URL for background images
+	var geenUrl = 'http://www.website.nl';
+	var baseUrl = '/wp-content/themes/bandbreed/images/backgrounds/';
 	var bg = $('#bg');	//	Background image
 	var bgOffset;		//	a number
-	var baseUrl = '/wp-content/themes/bandbreed/images/backgrounds/';
 	
 //	Declare initScreen variables
 	var wh;				//	Viewport height
@@ -18,10 +19,11 @@
 	var ih = 768;		//	Height of the actual bg image	
 	var idim = iw/ih;	//	Image dimension
 	
+//	Scrolling variables
 	var scrolled = 0;
 
-	
 //	////	End global variables
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Page initialisation and control	of screen													  //
@@ -33,7 +35,12 @@
 		//	Basic functions to do once
 			initScreen();
 			geenAlphaOmega();
-		
+			
+		//	Attach expander functionality	
+			if ( $('.expanderwrapper').length !== 0) {
+				geenExpander();
+			};
+			
 	});	//	////	End document ready
 
 //	What to do when page is loaded completely
@@ -48,6 +55,7 @@
 	
 		//	Check how far user is scrolled
 			scrolled = parseInt($(window).scrollTop());
+			//	document.title = scrolled;	// Show how far you have scrolled
 			
 	});	//	////	End window scroll
 
@@ -59,28 +67,10 @@
 				
 	});	//	////	End window resize
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//	Click handlers																			  	  //
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//	Template clickHandler function
-	function handler_click() {
-		//	Stuff to do on the click
-	};
-	
-//	////	End click handlers
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Functions																					  //
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//	Template click function
-	function clicker() {
-	
-		//	Load script to handle the actual click
-			$('#myDiv').click(handler_click);
-		
-	};
 
 //	When screen is drawn
 	function initScreen() {
@@ -92,7 +82,7 @@
 			sd = ww / wh;
 	
 		//	Set background image dimension to fit the screen
-			if(idim < sd) {
+			if (idim < sd) {
 				// when screen is smaller than the background
 					bg.width(ww * 1.05).height(ww / idim * 1.05);
 			} else if (idim > sd) {
@@ -101,12 +91,12 @@
 			};
 	
 		//	Position the image, around the middle of the screen
-			var offsetleft = Math.floor((ww - bg.width())/2);
-			var offsettop = Math.floor((wh - bg.height())/3);
-			bg.css('left', offsetleft + 'px').css('top', offsettop + 'px');
+			var offsetleft = Math.floor((ww - bg.width()) / 2);
+			var offsettop = Math.floor((wh - bg.height()) / 3);
+			bg.css({left: offsetleft, top: offsettop});
 		
-	};
-
+	};	//	////	End initScreen
+	
 // Adding alpha, omega and middle classes to lists
 	function geenAlphaOmega() {
 	
@@ -115,9 +105,26 @@
 			$('ul li:last-child').addClass('omega');
 			$('ul li').not(':first').not(':last').addClass('middle');
 		
-	};
+	};	//	////	End geenAlphaOmega
 	
 //	////	End functions
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//	Features																				  	  //
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//	Expander feature
+	function geenExpander() {
+		$('.expander').click(handler_expander);
+	};
+		//	Click handlers
+		function handler_expander() {
+			$(this).parent().toggleClass('open');
+		};	//	End Expander
+	
+//	////	End Features
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //	Plug-ins 													  								  //
