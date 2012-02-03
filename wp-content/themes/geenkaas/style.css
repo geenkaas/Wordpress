@@ -565,6 +565,70 @@ overflow: hidden;
 	margin-right: 6px;
 	}
 /* @end */
+
+/* @group Lightbox */
+
+#lbwrapper {
+	background: none;
+	display: none;
+	-ms-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccffffff,endColorstr=#ccffffff);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#ccffffff,endColorstr=#ccffffff);
+	background: rgba(255,255,255,0.8);
+	height: auto !important;
+	height: 100%;
+ 	left: 0;
+	min-height: 100%;
+	position: fixed;
+ 	top: 0;
+ 	width:100%;
+	z-index: 666666;
+	}
+#lbcontent {
+	background: #000;
+	box-shadow: 3px 3px 9px rgba(0,0,0,0.5);
+	color: #fff;
+	display: none;
+	margin-left: -300px;
+	margin-top: -200px;
+	min-height: 400px;
+	left: 50%;
+	position: fixed;
+	text-align: left;
+	top: 40%;
+	width: 600px;
+	behavior: url(/wp-content/themes/bandbreed/scripts/PIE.htc);
+	}
+#lbclose {
+	background: #000;
+	border: 4px solid #aaa;
+	color: #aaa;
+	cursor: pointer;
+	font: bold 20px/32px sans-serif;
+	position: absolute;
+	right: -15px;
+	top: -15px;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	text-transform: uppercase;
+	-moz-border-radius: 40px;
+	border-radius: 40px;
+	box-shadow: inset 0px 5px 5px rgba(0,0,0,0.5);
+	behavior: url(/wp-content/themes/bandbreed/scripts/PIE.htc);
+	}
+#lbclose:hover {
+	color: #fff;
+	border-color: #fff;
+	}
+#lbclose:active {
+	background: #fff;
+	color: #000;
+	text-shadow: 0 2px 3px rgba(0,0,0,0.5);
+	top: -13px;
+	border-color: #000;
+	}
+/* @end */
+
 /* @end */
 
 

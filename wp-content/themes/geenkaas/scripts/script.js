@@ -35,11 +35,12 @@
 		//	Basic functions to do once
 			initScreen();
 			geenAlphaOmega();
+			geenHover();
 			
 		//	Attach expander functionality	
-			if ( $('.expanderwrapper').length !== 0) {
-				geenExpander();
-			};
+			if ( $('.expanderwrapper').length !== 0) { geenExpander() };
+		//	Attach Lightbox functionality
+			if ( $('#lbwrapper').length !== 0) { geenLightbox() };
 			
 	});	//	////	End document ready
 
@@ -117,11 +118,53 @@
 //	Expander feature
 	function geenExpander() {
 		$('.expander').click(handler_expander);
-	};
-		//	Click handlers
-		function handler_expander() {
-			$(this).parent().toggleClass('open');
-		};	//	End Expander
+	};	//	End geenExpander
+//	Click handlers
+	function handler_expander() {
+		$(this).parent().toggleClass('open');
+	};	//	End Expander
+		
+//	lightbox script
+	function geenLightbox() {
+		
+        $('#lbclose').unbind();
+		$('.lbactivate').click(function() {
+			$('#lbwrapper').fadeIn('500', 'easeInQuad', function() {
+        		// Popup complete
+        			$('.lbactivate').unbind();
+        			$('#lbcontent').show();
+        			$('#lbclose').click(function() {
+        				// Popdown complete
+							$('#lbwrapper').fadeOut('500', 'easeOutQuad', function() {
+								//	Start all over
+									geenLightbox();
+								//
+							});
+						//
+					});
+				//
+      		});
+		});
+	};	//	End geenLightbox
+	
+//	Hoverintent template
+	function geenHover() {
+		$('#mydiv li').hoverIntent (
+			//	mouseOver a listitem in mydiv
+				function() {
+					//	Remove old hoverclasses from all list items
+						$('#mydiv li').removeClass('hover');
+					//	Add the hover class to the hovering item
+						$(this).addClass('hover');
+				},
+			//	mouseOut
+				function() {
+					//	Remove old hoverclasses from all list items
+						$('#tabs ul li').removeClass('hover');
+				};
+			//
+		);
+    };	//	End geenHover
 	
 //	////	End Features
 
