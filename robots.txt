@@ -1,7 +1,10 @@
-#	Uncomment next line to disallow robots
-#	Disallow: /
 
 User-agent: *
+
+#	Comment next line to allow robots
+Disallow: /
+
+#	Standard allowance
 
 Disallow: /_core
 

@@ -3,24 +3,36 @@
 	define('parameters', 'parameters');
 	define('auto', 'auto');
 	define('test', 'test');
-
-	//	Theme name
-	$sitename = 'Geenkaas';
-	$themename = 'Geenkaas';
-	$shortname = 'gk';
+	
+	//	Remove the generator tag
+	remove_action('wp_head', 'wp_generator');
 	
 	//	Remove admin bar
 	add_action( 'show_admin_bar', '__return_false' );
 
-	
 	if ( function_exists( 'add_theme_support' ) ) {
 		add_theme_support( 'post-thumbnails' );
-		set_post_thumbnail_size( 100, 100, true );
-		add_image_size( 'category-post-image', 640, auto );
+		set_post_thumbnail_size( 100, 100 );
+		add_image_size( 'background-image', 1024, 768 );
+		add_image_size( 'post-image', 640, 300 );
 	}
 	
-	//	Remove markup for Excerpt
-	remove_filter('the_excerpt', 'wpautop');
+	//	Custom search in posts:
+	function custom_search_form( $form, $value = "Zoek", $post_type = 'post' ) {
+		$form_value = (isset($value)) ? $value : attribute_escape(apply_filters('the_search_query', get_search_query()));
+		$form = '<form role="search" method="get" id="searchform" action="' . get_option('home') . '/" >
+			<div>
+				<label class="searchtitle screen-reader-text" for="s">
+					Zoeken op trefwoord en categorie
+				</label><br />
+				<input type="hidden" name="post_type" value="'.$post_type.'" />
+				<input type="text" placeholder="' . $form_value . '" name="s" id="s" />
+				<input type="submit" id="searchsubmit" value="'.esc_attr(__('Zoeken')).'" />
+			</div>
+		</form>';
+		return $form;
+	}
+	
 	
 	//	Register widgets for each category
 	if ( function_exists('register_sidebar') ) {
@@ -30,8 +42,8 @@
 		foreach ($categories as $cat) {
 			register_sidebar(array(
 				'name' => 'Sidebar '.$cat->category_nicename,
-				'before_widget' => '<li id="%1$s" class="widget %2$s '.$cat->category_nicename.'">',
-				'after_widget' => '</li>',
+				'before_widget' => '<div id="%1$s" class="widget %2$s '.$cat->category_nicename.'">',
+				'after_widget' => '</div>',
 				'before_title' => '<h3 class="widgettitle">',
 				'after_title' => '</h3>',
 			));
@@ -73,8 +85,8 @@
 		};
 	};
 
-add_action('template_redirect', 'inherit_template', 1);
-	
+	add_action('template_redirect', 'inherit_template', 1);
+
 	//	Thumbnail gallery
 	
 	$slidercount = 0;
@@ -140,7 +152,6 @@ add_action('template_redirect', 'inherit_template', 1);
 		}
 	}
 
-	
 	$array = array(test);
 	foreach ($array as &$widgettitle) {
 	
@@ -149,118 +160,19 @@ add_action('template_redirect', 'inherit_template', 1);
 		
 	}
 	
-	//	Custom breadcrumbs
-	function get_breadcrumbs() {
-
-		$introtext = 'Je bevindt je hier ';
-		$delimiter = '&gt;';
-		$home = 'Home'; // text for the 'Home' link
-		$before = '<span class="current">'; // tag before the current crumb
-		$after = '</span>'; // tag after the current crumb
-		
-		if ( is_home() || is_front_page() ) {
-				echo '<span>&nbsp;</span>';
-		} elseif ( !is_home() && !is_front_page() || is_paged() ) {
-		 
-			global $post;
-			$homeLink = get_bloginfo('url');
-			echo $introtext . '<a href="' . $homeLink . '">' . $home . '</a> ' . $delimiter . ' ';
-				
-			if ( is_category() ) {
-				global $wp_query;
-				$cat_obj = $wp_query->get_queried_object();
-				$thisCat = $cat_obj->term_id;
-				$thisCat = get_category($thisCat);
-				$parentCat = get_category($thisCat->parent);
-				if ($thisCat->parent != 0) echo(get_category_parents($parentCat, TRUE, ' ' . $delimiter . ' '));
-				echo $before . single_cat_title('', false) . $after;
-				
-			} elseif ( is_day() ) {
-				echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
-				echo '<a href="' . get_month_link(get_the_time('Y'),get_the_time('m')) . '">' . get_the_time('F') . '</a> ' . $delimiter . ' ';
-				echo $before . get_the_time('d') . $after;
-				
-			} elseif ( is_month() ) {
-				echo '<a href="' . get_year_link(get_the_time('Y')) . '">' . get_the_time('Y') . '</a> ' . $delimiter . ' ';
-				echo $before . get_the_time('F') . $after;
-				
-			} elseif ( is_year() ) {
-				echo $before . get_the_time('Y') . $after;
-				
-			} elseif ( is_single() && !is_attachment() ) {
-				if ( get_post_type() != 'post' ) {
-				$post_type = get_post_type_object(get_post_type());
-				$slug = $post_type->rewrite;
-				echo '<a href="' . $homeLink . '/' . $slug['slug'] . '/">' . $post_type->labels->singular_name . '</a> ' . $delimiter . ' ';
-				echo $before . get_the_title() . $after;
-			} else {
-				$cat = get_the_category(); $cat = $cat[0];
-				echo get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
-				echo $before . get_the_title() . $after;
-			}
-				
-			} elseif ( !is_single() && !is_page() && get_post_type() != 'post' ) {
-				$post_type = get_post_type_object(get_post_type());
-				echo $before . $post_type->labels->singular_name . $after;
-				
-			} elseif ( is_attachment() ) {
-				$parent = get_post($post->post_parent);
-				$cat = get_the_category($parent->ID); $cat = $cat[0];
-				echo get_category_parents($cat, TRUE, ' ' . $delimiter . ' ');
-				echo '<a href="' . get_permalink($parent) . '">' . $parent->post_title . '</a> ' . $delimiter . ' ';
-				echo $before . get_the_title() . $after;
-				
-			} elseif ( is_page() && !$post->post_parent ) {
-				echo $before . get_the_title() . $after;
-				
-			} elseif ( is_page() && $post->post_parent ) {
-				$parent_id  = $post->post_parent;
-				$breadcrumbs = array();
-				while ($parent_id) {
-				$page = get_page($parent_id);
-				$breadcrumbs[] = '<a href="' . get_permalink($page->ID) . '">' . get_the_title($page->ID) . '</a>';
-				$parent_id  = $page->post_parent;
-			}
-				$breadcrumbs = array_reverse($breadcrumbs);
-				foreach ($breadcrumbs as $crumb) echo $crumb . ' ' . $delimiter . ' ';
-				echo $before . get_the_title() . $after;
-		 
-			} elseif ( is_search() ) {
-				echo $before . 'Search results for "' . get_search_query() . '"' . $after;
-		 
-			} elseif ( is_tag() ) {
-				echo $before . 'Posts tagged "' . single_tag_title('', false) . '"' . $after;
-		 
-			} elseif ( is_author() ) {
-				global $author;
-				$userdata = get_userdata($author);
-				echo $before . 'Articles posted by ' . $userdata->display_name . $after;
-		 
-			} elseif ( is_404() ) {
-				echo $before . 'Error 404' . $after;
-			}
-		 
-			if ( get_query_var('paged') ) {
-				if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ' (';
-				echo __('Page') . ' ' . get_query_var('paged');
-				if ( is_category() || is_day() || is_month() || is_year() || is_search() || is_tag() || is_author() ) echo ')';
-			}
-		 
-		}
-	} // end get_breadcrumbs()
 	
 	
 	// Read more links on exceprts
 	function new_excerpt_length($length) {
-		return 10;
+		return 60;
 	}
 	add_filter('excerpt_length', 'new_excerpt_length');
 	add_filter('widget_text', 'do_shortcode');
 	
 	function new_excerpt_more($more) {
 		global $post;
-		$readmore = 'Lees verder...';
-		return '<span class="readon"><a href="'. get_permalink($post->ID) . '">'.$readmore.'</a></span>';
+		$readmore = 'Lees meer &raquo;';
+		return '... <span class="readon"><a href="'. get_permalink($post->ID) . '">'.$readmore.'</a></span>';
 	}
 	add_filter('excerpt_more', 'new_excerpt_more');
 
@@ -283,7 +195,5 @@ add_action('template_redirect', 'inherit_template', 1);
 	add_action('widgets_init', 'unregister_default_wp_widgets', 1);
 	
 	
-	//	Remove the generator tag
-	remove_action('wp_head', 'wp_generator');
 
 ?>
