@@ -11,11 +11,11 @@
 				$lastposts = get_posts($args);
 				$postcount = 0;
 				foreach($lastposts as $post) : setup_postdata($post);  ?>
-					<div class="post-<?php echo $postcount; ?>">
+					<article class="post-<?php echo $postcount; ?>">
 						<h3 class="posttitle"><?php the_title(); ?></h3>
 						<?php if ( has_post_thumbnail() ) {the_post_thumbnail();} ?>
 						<?php the_content(); ?>
-					</div>
+					</article>
 				<?php $postcount++; endforeach; ?>
 				
 			</div>

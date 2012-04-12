@@ -1,7 +1,7 @@
 		<?php $geenpage = 'category'; ?>
 		<?php get_header(); ?>
 		
-			<section id="maincontent" role="main">
+			<div id="maincontent" role="main">
 			
 				<div class="tab-cat datum">
 					<a href="<?php echo home_url(); ?>/<?php the_time('Y/m/') ?>">
@@ -15,7 +15,7 @@
 					
 					<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 					
-						<div id="categorywrapper" class="alignwrapper">
+						<article id="categorywrapper" class="alignwrapper">
 							<div class="alignleft">
 								<?php if ( has_post_thumbnail() ) { the_post_thumbnail('redactieimg'); } ?>
 							</div>
@@ -29,14 +29,14 @@
 								</p>
 								<?php the_excerpt(); ?>
 							</div>
-						</div>
+						</article>
 									
 					<?php endwhile; endif; ?>
 					
 					<?php get_search_form(); ?>
 
 				</div>
-			</section>
+			</div>
 			
 			<?php get_template_part( 'includes/sidemenu' ); ?>
 			

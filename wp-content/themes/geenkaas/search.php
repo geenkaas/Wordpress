@@ -1,7 +1,7 @@
 					<?php $geenpage = 'search'; ?>
 					<?php get_header(); ?>
 		
-					<section id="maincontent" role="main">
+					<div id="maincontent" role="main">
 						<div class="paddingwrapper">
 						<?= custom_search_form( null, 'Uw zoekterm', 'post'); ?>
 						
@@ -9,10 +9,9 @@
 						
 							<h2 class="page-title"><?php printf( __( 'Zoekresultaten voor: %s'), '<span>' . get_search_query() . '</span>' ); ?></h2>
 							
-							<ul id="searchresults">
 								<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 									
-									<li>
+									<div class="searchresults">
 										
 										<div class="alignwrapper">
 											<div class="alignleft">
@@ -29,10 +28,9 @@
 												<?php the_excerpt(); ?>
 											</div>
 										</div>
-									</li>
+									</div>
 								
 								<?php endwhile; endif; ?>
-							</ul>
 								
 						<?php else : ?>
 						
@@ -49,7 +47,7 @@
 		
 
 						</div>						
-					</section>
+					</div>
 					
 					<?php get_template_part( 'inc_sidemenu' ); ?>
 					
