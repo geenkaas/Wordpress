@@ -1,16 +1,20 @@
 	
 	
-			<footer id="footerwrapper" class="paddingwrapper alignwrapper">
-				<div class="alignleft w50">
+			<footer id="footerwrapper" class="alignwrapper">
+				<div class="alignleft">
 					<a href="<?php echo home_url( '/' ); ?>?device=desktop">
 						<p>
-							<span>Desktop weergave</span> <br /> <?php bloginfo('name'); ?> >
+							<span>Desktop weergave</span>
+							<br />
+							<?php bloginfo('name'); ?> >
 						</p>
 					</a>
 				</div>
-				<div class="alignright w50">
+				<div class="alignright">
 					<p>
-						&copy; <?php echo date("Y"); ?> <br /> Bandbreed
+						&copy; <?php echo date("Y"); ?>
+						<br />
+						Bandbreed
 					</p>
 				</div>
 			</footer>

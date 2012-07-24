@@ -31,7 +31,7 @@
 
 	<div id="sitewrapper">
 		
-		<header id="headerwrapper" class="paddingwrapper" role="banner">
+		<header id="headerwrapper" role="banner">
 			<a href="<?php echo home_url( '/' ); ?>" title="Terug naar de <?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?> Homepage" rel="home">
 				<div id="logowrapper">
 					<?php bloginfo('name'); ?>
