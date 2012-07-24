@@ -12,18 +12,20 @@
 				$postcount = 0;
 				foreach($lastposts as $post) : setup_postdata($post);  ?>
 				
-				<a href="<?php the_permalink(); ?>">
-					<div data-count="<?php echo $postcount; ?>">
-						<h4 class="posttitle"><?php the_title(); ?></h4>
-						<?php the_content(); ?>
-					</div>
-				</a>
+				<div class="postwrapper" data-count="<?php echo $postcount; ?>">
+					<?php the_time('d/m/Y') ?>
+					<a href="<?php the_permalink(); ?>">
+						<h4 class="posttitle">
+							<?php the_title(); ?>
+						</h4>
+					</a>
+					<?php the_content(); ?>
+				</div>
 					
 				<?php $postcount++; endforeach; ?>
 				
 				<div class="phpfilename">Index.php</div>
 				
-			
 			</div>
 		</div><!-- End bodywrapper -->
 

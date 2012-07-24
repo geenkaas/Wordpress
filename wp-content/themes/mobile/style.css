@@ -40,9 +40,8 @@ body {
 /* @group Temporary */
 .phpfilename {
 	background: #f90;
-	display: none;
 	padding: 10px 20px;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 	}
 /* @end */
 
@@ -83,7 +82,7 @@ sub {bottom: -0.25em;}
 figure {margin: 0;}
 
 html {
-	background: #ccc url(images/backgrounds/bg_canvas.jpg);
+	background: #ccc url(images/backgrounds/bg_canvas_dark.jpg);
 	font-size: 100%;
 	-webkit-text-size-adjust: 100%;
 	-ms-text-size-adjust: 100%;
@@ -216,7 +215,8 @@ input:invalid, textarea:invalid {background-color: #f0dddd;}
 /* @group Skeleton */
 #sitewrapper {
 	background: #fff;
-	box-shadow: 0 0 30px 20px rgba(0,0,0,.4);
+	-webkit-box-shadow: 0 0 30px 20px rgba(0,0,0,1);
+	box-shadow: 0 0 50px 20px rgba(0,0,0,1);
 	}
 #bodywrapper {
 	margin: 0 0 20px;
