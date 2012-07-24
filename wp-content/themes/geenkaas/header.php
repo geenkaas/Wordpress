@@ -8,7 +8,7 @@
 			<meta charset="<?php bloginfo('charset'); ?>">
 			<meta name="description" content="<?php echo dynamic_meta_description(); ?>">
 			<meta name="author" content="Geenkaas">
-			<meta name="viewport" content="width=1000">
+			<meta name="viewport" content="width=960">
 			
 		<!-- Title and link info -->
 			<title dir="ltr"><?php wp_title('');?><?php if(wp_title('', false)) { echo ' | '; } ?><?php bloginfo('name'); ?><?php if(is_home()) { echo ' | ' ; } ?><?php if(is_home()) { bloginfo('description') ; } ?></title>
@@ -21,7 +21,7 @@
 			<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 			
 		<!-- Bringing old browsers up to date -->
-			<script src="<?php bloginfo("template_url");?>/scripts/libs/modernizr-2.5.3.min.js"></script>
+			<script src="<?php bloginfo("template_url");?>/scripts/modernizr-2.6.1.min.js"></script>
 			
 		<?php wp_head(); ?>
 		

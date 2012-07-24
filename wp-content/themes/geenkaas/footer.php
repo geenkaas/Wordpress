@@ -24,12 +24,9 @@
 		<?php wp_footer(); ?>
 		
 		<!-- Load jQuery and custom plugins/scripts -->
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-			<script>window.jQuery || document.write('<script async src="scripts/libs/jquery-1.7.1.min.js"><\/script>')</script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+			<script>window.jQuery || document.write('<script src="scripts/jquery-1.7.2.min.js"><\/script>')</script>
 			<script async src="<?php bloginfo("template_url");?>/scripts/script.js"></script>
-			
-		<!-- Facebook -->
-			<div id="fb-root"></div>
 			
 		<!-- Google Analytics code -->
 		<script>
