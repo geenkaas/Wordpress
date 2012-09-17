@@ -22,7 +22,12 @@ audio[controls], canvas, video {
 * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
 	box-sizing: border-box;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 	}
 html {
 	background: #069;
@@ -105,11 +110,6 @@ body:before {
 /* @end */
 
 /* @group Selectable */
-* {
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-	}
 h1, h2, h3, h4, h5, h6, p, a,
 blockquote, pre, abbr, acronym,
 address, big, cite, code, del, ins, samp,
