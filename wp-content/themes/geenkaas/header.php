@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--><html class="no-js" lang="nl"><!--<![endif]-->
 	<head>
 		<!-- Meta information -->
-			<meta charset="<?php bloginfo('charset'); ?>">
+			<meta charset="<?php bloginfo('charset'); ?>" content="IE=edge,chrome=1">
 			<meta name="description" content="<?php echo dynamic_meta_description(); ?>">
 			<meta name="author" content="Geenkaas">
 			<meta name="viewport" content="width=960">
@@ -21,12 +21,13 @@
 			<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 			
 		<!-- Bringing old browsers up to date -->
-			<script src="<?php bloginfo("template_url");?>/scripts/modernizr-2.6.1.min.js"></script>
+			<script src="<?php bloginfo("template_url");?>/scripts/modernizr-2.6.2.min.js"></script>
 			
 		<?php wp_head(); ?>
 		
 	</head>
 	<body>
+	
 		<div id="sitewrapper">
 		
 			<header id="headerwrapper" role="banner">

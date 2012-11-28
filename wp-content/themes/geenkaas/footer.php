@@ -21,21 +21,24 @@
 			endforeach; ?>
 		</div>
 		
+        <!--[if lt IE 9]>
+            <div class="chromeframe">You are using an <strong>ancient</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</div>
+        <![endif]-->
+		
 		<?php wp_footer(); ?>
 		
 		<!-- Load jQuery and custom plugins/scripts -->
-			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-			<script>window.jQuery || document.write('<script src="scripts/jquery-1.7.2.min.js"><\/script>')</script>
-			<script async src="<?php bloginfo("template_url");?>/scripts/script.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+			<script>window.jQuery || document.write('<script src="scripts/jquery-1.8.2.min.js"><\/script>')</script>
+			<script src="<?php bloginfo("template_url");?>/scripts/script.js"></script>
 			
 		<!-- Google Analytics code -->
-		<script>
-			var _gaq=[['_setAccount','UA-REPLACE'],['_trackPageview']];
-			(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
-			g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-			s.parentNode.insertBefore(g,s)}(document,'script'));
-			typeof _gaq!="undefined"&&_gaq!==null&&$(document).ajaxSend(function(a,b,c){_gaq.push(["_trackPageview",c.url])})
-		</script>
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXXX'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
 
 	</body>
 </html>
