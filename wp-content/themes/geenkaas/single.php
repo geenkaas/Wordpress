@@ -1,6 +1,6 @@
 		<?php get_header(); ?>
 
-			<div id="maincontent" role="main">
+			<div id="maincontent" class="clearfix" role="main">
 
 				<?php if ( have_posts()) : while(have_posts() ) : the_post (); ?>
 				<?php $mytags = strip_tags(get_the_tag_list('',',','')); ?>
@@ -10,17 +10,17 @@
 
 				<article class="postwrapper" data-tags="<?php echo $mytags; ?>">
 
-					<?php the_time('d/m/Y') ?>
+					<span class="datum"><?php the_time('(d/m/Y)') ?></span>
 					<h1 class="posttitle"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
 
-					<p class="tagwrapper">
-						Tags voor deze post: <?php the_category(' , '); ?>
+					<p class="catwrapper">
+						Categories this post belongs to: <?php the_category(' , '); ?>
 					</p>
 
 					<?php the_content(); ?>
 
 					<div id="relatedwrapper">
-						<p class="related">Gerelateerde artikelen - <?php echo $category->cat_name; ?></p>
+						<p class="related">Related articles (by categorie) - <?php echo $category->cat_name; ?></p>
 
 						<ul class="relatedlist">
 							<?php $args = array(
@@ -48,7 +48,7 @@
 
 				<?php if ( current_user_can('level_10') ) { ?>
 					<div class="level10">
-						page-ontmoet-de-reviewers.php (U bent ingelogd als admin)
+						single.php (U bent ingelogd als admin)
 					</div>
 					<div class="<?php echo $post->post_parent; ?>">
 						Parent (actie) ID = <?= $post->post_parent; ?>
